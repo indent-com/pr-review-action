@@ -1,0 +1,22 @@
+name: Test Action
+
+on:
+  pull_request:
+    types: [opened, synchronize, reopened]
+  workflow_dispatch:
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      
+      - name: Test action syntax
+        run: |
+          # Just validate the action.yml syntax
+          if command -v actionlint >/dev/null 2>&1; then
+            actionlint action.yml
+          else
+            echo "actionlint not available, skipping syntax check"
+          fi
