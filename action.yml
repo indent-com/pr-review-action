@@ -44,7 +44,7 @@ runs:
         EXPONENT_API_KEY: ${{ inputs.indent-api-key }}
         PR_NUMBER: ${{ github.event.number }}
       run: |
-        uvx indent run --workflow-id ${{ inputs.workflow-id }}
+        uvx indent workflow trigger ${{ inputs.workflow-id }}
 
 branding:
   icon: 'code-review'
