@@ -16,7 +16,7 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 30
     steps:
-      - uses: exponent-run/pr-review-action@beta
+      - uses: indent-com/pr-review-action@beta
         with:
           indent-api-key: ${{ secrets.PR_REVIEW_INDENT_API_KEY }}
 ```
@@ -46,7 +46,7 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 30
     steps:
-      - uses: exponent-run/pr-review-action@beta
+      - uses: indent-com/pr-review-action@beta
         with:
           indent-api-key: ${{ secrets.PR_REVIEW_INDENT_API_KEY }}
 ```
