@@ -1,6 +1,6 @@
 name: 'Indent PR Review'
 description: 'Run Indent AI code reviews on pull requests'
-author: 'Exponent'
+author: 'Indent'
 
 inputs:
   indent-api-key:

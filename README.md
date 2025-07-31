@@ -11,6 +11,10 @@ on:
   pull_request:
     types: [opened, synchronize, reopened]
 
+concurrency:
+  group: indent-pr-review-${{ github.event.number }}
+  cancel-in-progress: true
+
 jobs:
   indent:
     runs-on: ubuntu-latest
@@ -39,6 +43,10 @@ name: Indent PR Review
 on:
   pull_request:
     types: [opened, synchronize, reopened, labeled]
+
+concurrency:
+  group: indent-pr-review-${{ github.event.number }}
+  cancel-in-progress: true
 
 jobs:
   indent:
