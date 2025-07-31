@@ -30,4 +30,4 @@ git tag beta
 git push origin beta
 
 echo "✅ Successfully published action to @beta tag"
-echo "🔗 Action can now be used with: exponent-run/pr-review-action@beta"
+echo "🔗 Action can now be used with: indent-com/pr-review-action@beta"
