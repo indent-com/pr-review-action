@@ -9,7 +9,7 @@ inputs:
   workflow-id:
     description: 'Indent workflow ID to run'
     required: false
-    default: 'indent_pr_review'
+    default: 'pr_review'
   python-version:
     description: 'Python version to use'
     required: false
