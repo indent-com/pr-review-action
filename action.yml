@@ -44,7 +44,7 @@ runs:
       env:
         EXPONENT_API_KEY: ${{ inputs.indent-api-key }}
       run: |
-        uvx indent run ${{ inputs.chat-id }}
+        uvx indent run --chat-id ${{ inputs.chat-id }}
 
 branding:
   icon: 'code-review'
