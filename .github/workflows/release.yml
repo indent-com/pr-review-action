@@ -2,11 +2,11 @@ name: Release
 
 on:
   push:
-    branches: [main, prerelease]
+    branches: [main, pre]
   workflow_dispatch:
     inputs:
       tag:
-        description: 'Tag to publish (alpha, prerelease, etc.)'
+        description: 'Tag to publish (alpha, pre, etc.)'
         required: false
         default: 'alpha'
         type: string
@@ -30,7 +30,7 @@ jobs:
           
           # Determine which tag to update
           if [[ "${{ github.event_name }}" == "push" ]]; then
-            if [[ "${{ github.ref }}" == "refs/heads/prerelease" ]]; then
+            if [[ "${{ github.ref }}" == "refs/heads/pre" ]]; then
               TAG="prerelease"
             else
               TAG="alpha"
