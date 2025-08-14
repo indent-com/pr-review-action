@@ -4,7 +4,10 @@
 
 set -e
 
-echo "🚀 Publishing Indent PR Review Action..."
+# Check if a tag argument was provided
+TAG="${1:-beta}"
+
+echo "🚀 Publishing Indent PR Review Action to @$TAG..."
 
 # Make sure we're on main branch
 if [ "$(git branch --show-current)" != "main" ]; then
@@ -22,12 +25,12 @@ fi
 echo "📥 Pulling latest changes..."
 git pull origin main
 
-# Update beta tag
-echo "🏷️  Updating beta tag..."
-git tag -d beta 2>/dev/null || true
-git push origin :refs/tags/beta 2>/dev/null || true
-git tag beta
-git push origin beta
+# Update the specified tag
+echo "🏷️  Updating $TAG tag..."
+git tag -d "$TAG" 2>/dev/null || true
+git push origin ":refs/tags/$TAG" 2>/dev/null || true
+git tag "$TAG"
+git push origin "$TAG"
 
-echo "✅ Successfully published action to @beta tag"
-echo "🔗 Action can now be used with: indent-com/pr-review-action@beta"
+echo "✅ Successfully published action to @$TAG tag"
+echo "🔗 Action can now be used with: indent-com/pr-review-action@$TAG"

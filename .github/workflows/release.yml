@@ -4,6 +4,12 @@ on:
   push:
     branches: [main]
   workflow_dispatch:
+    inputs:
+      tag:
+        description: 'Tag to publish (beta, prerelease, etc.)'
+        required: false
+        default: 'beta'
+        type: string
 
 permissions:
   contents: write
@@ -17,15 +23,20 @@ jobs:
         with:
           fetch-depth: 0
 
-      - name: Update beta tag
+      - name: Update tag
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
           
-          # Delete and recreate the beta tag to point to latest commit
-          git tag -d beta || true
-          git push origin :refs/tags/beta || true
-          git tag beta
-          git push origin beta
+          # Determine which tag to update
+          TAG="${{ github.event.inputs.tag || 'beta' }}"
+          
+          # Delete and recreate the tag to point to latest commit
+          git tag -d "$TAG" || true
+          git push origin ":refs/tags/$TAG" || true
+          git tag "$TAG"
+          git push origin "$TAG"
+          
+          echo "✅ Successfully published to @$TAG"
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
