@@ -2,13 +2,13 @@ name: Release
 
 on:
   push:
-    branches: [main]
+    branches: [main, prerelease]
   workflow_dispatch:
     inputs:
       tag:
-        description: 'Tag to publish (beta, prerelease, etc.)'
+        description: 'Tag to publish (alpha, prerelease, etc.)'
         required: false
-        default: 'beta'
+        default: 'alpha'
         type: string
 
 permissions:
@@ -29,7 +29,15 @@ jobs:
           git config user.email "github-actions[bot]@users.noreply.github.com"
           
           # Determine which tag to update
-          TAG="${{ github.event.inputs.tag || 'beta' }}"
+          if [[ "${{ github.event_name }}" == "push" ]]; then
+            if [[ "${{ github.ref }}" == "refs/heads/prerelease" ]]; then
+              TAG="prerelease"
+            else
+              TAG="alpha"
+            fi
+          else
+            TAG="${{ github.event.inputs.tag }}"
+          fi
           
           # Delete and recreate the tag to point to latest commit
           git tag -d "$TAG" || true
