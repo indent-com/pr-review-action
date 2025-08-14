@@ -46,7 +46,6 @@ runs:
       shell: bash
       env:
         EXPONENT_API_KEY: ${{ inputs.indent-api-key }}
-        GH_TOKEN: ${{ github.token }}
       run: |
         uvx indent run --chat-id ${{ inputs.chat-id }}
 
