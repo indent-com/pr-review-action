@@ -13,6 +13,9 @@ inputs:
     description: 'Python version to use'
     required: false
     default: '3.12.2'
+  metadata:
+    required: false
+    default: ''
 
 runs:
   using: 'composite'
@@ -43,6 +46,7 @@ runs:
       shell: bash
       env:
         EXPONENT_API_KEY: ${{ inputs.indent-api-key }}
+        GH_TOKEN: ${{ github.token }}
       run: |
         uvx indent run --chat-id ${{ inputs.chat-id }}
 
